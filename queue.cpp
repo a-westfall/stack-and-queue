@@ -50,6 +50,32 @@ int enqueue(int element) {
     // queue is no longer empty
     empty = false;
 
+    // return success code
+    return 0;
+}
+
+/*
+    Remove the top element from the queue.
+
+    @return Success or failure of removing the element
+    @retval 0 Success
+    @retval -1 Failure
+*/
+int dequeue() {
+
+    // fail if queue is empty
+    if (isEmpty())
+        return -1;
+    
+    // remove front element
+    queue[head] = 0;
+    head = (head + 1) % SIZE;
+
+    // check if queue empty
+    if (head == tail)
+        empty = true;
+    
+    // return success code
     return 0;
 }
 
@@ -63,6 +89,13 @@ int main() {
 
     assert(!isEmpty());
     assert(head == 0);
+    assert(tail == 1);
+
+    // remove an element
+    dequeue();
+
+    assert(isEmpty());
+    assert(head == 1);
     assert(tail == 1);
 
     return 0;
