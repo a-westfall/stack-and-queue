@@ -48,8 +48,11 @@ bool isFull() {
 int push(int element) {
 
     // fail if stack is full
-    if (isFull())
+    if (isFull()) {
+        std::cerr << "ERROR. Unable to push element. Stack is full.\n\n";
+
         return -1;
+    }
     
     // add element to tos
     stack[++tos] = element;
@@ -68,8 +71,10 @@ int push(int element) {
 int pop() {
 
     // fail if stack is empty
-    if (empty())
+    if (empty()) {
+        std::cerr << "ERROR. Unable to pop element. Stack is empty.\n\n";
         return -1;
+    }
     
     // pop the element at tos
     stack[tos--] = 0;
@@ -126,6 +131,12 @@ int main() {
 
     assert(isFull());
 
+    // push to full stack
+    push(1);
+
+    assert(isFull());
+    assert(tos == SIZE - 1);
+
     // stack status
     pop();
     status(std::cout);
@@ -140,10 +151,34 @@ int main() {
     pop();
     pop();
     pop();
+
     status(std::cout);
 
     assert(empty());
     assert(!isFull());
+
+    // pop from empty stack
+    pop();
+
+    assert(empty());
+    assert(tos == -1);
+
+    // push and pop elements
+    push(3);
+    push(245);
+    push(43);
+    pop();
+    push(34);
+    push(21);
+    push(1);
+    pop();
+    pop();
+    
+    status(std::cout);
+
+    assert(!empty());
+    assert(!isFull());
+    assert(tos == 2);
 
     return 0;
 }
