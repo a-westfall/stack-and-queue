@@ -4,12 +4,13 @@
     Includes push, pop, status, empty and isFull.
 */
 
+#include <iostream>
 #include <cassert>
 
 // stack size
 const int SIZE = 6;
 
-// top of stack
+// top of stack meta-pointer
 int tos = -1;
 
 // array stack
@@ -18,9 +19,9 @@ int stack[SIZE];
 /*
     Check if there are no elements in the stack.
 
-    @return whether the stack is empty
-    @retval true stack empty
-    @retval false at least on element in stack
+    @return Whether the stack is empty
+    @retval true Stack empty
+    @retval false At least on element in stack
 */
 bool empty() {
     return tos == -1;
@@ -29,9 +30,9 @@ bool empty() {
 /*
     Check if the stack has the max number of elements.
 
-    @return whether the stack is full
-    @retval true stack is full
-    @retval false stack is not full
+    @return Whether the stack is full
+    @retval true Stack is full
+    @retval false Stack is not full
 */
 bool isFull() {
     return tos >= SIZE - 1;
@@ -40,9 +41,9 @@ bool isFull() {
 /*
     Add an element to the top of stack.
 
-    @return success or failure of pushing the element
-    @retval 0 success
-    @retval -1 failure
+    @return Success or failure of pushing the element
+    @retval 0 Success
+    @retval -1 Failure
 */
 int push(int element) {
 
@@ -60,9 +61,9 @@ int push(int element) {
 /*
     Remove the top element from the stack.
 
-    @return success or failure of removing the element
-    @retval 0 success
-    @retval -1 failure
+    @return Success or failure of removing the element
+    @retval 0 Success
+    @retval -1 Failure
 */
 int pop() {
 
@@ -75,6 +76,29 @@ int pop() {
 
     // return success code
     return 0;
+}
+
+/*
+    View stack contents and tos.
+
+    @param out Output stream that is written to 
+    @return Ostream containing array contents and tos meta-pointer
+*/
+std::ostream& status(std::ostream& out) {
+
+    // add array contents to ostream
+    out << "Array contents: \n";
+    for (int i = 0; i < SIZE; ++i) {
+        out << i << ":  " << stack[i] << "\n";
+    }
+
+    // add tos to ostream
+    out << "\nCurrent TOS: " << tos << "\n";
+
+    // add contents of stack at tos to ostream
+    out << "Element at TOS: " << stack[tos] << "\n\n";
+
+    return out;
 }
 
 int main() {
@@ -103,6 +127,25 @@ int main() {
     push(6);
 
     assert(isFull());
+
+    // stack status
+    pop();
+    status(std::cout);
+
+    assert(!empty());
+    assert(!isFull());
+    assert(tos == 4);
+
+    // pop entire stack
+    pop();
+    pop();
+    pop();
+    pop();
+    pop();
+    status(std::cout);
+
+    assert(empty());
+    assert(!isFull());
 
     return 0;
 }
