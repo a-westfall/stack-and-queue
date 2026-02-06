@@ -31,6 +31,17 @@ bool isEmpty() {
 }
 
 /*
+    Check if the queue has the max number of elements.
+
+    @return Whether the queue is full
+    @retval true Queue is full
+    @retval false Queue is not full
+*/
+bool isFull() {
+    return head == tail && !empty;
+}
+
+/*
     Add an element to the back of the queue.
 
     @param element Item to be added to the queue
@@ -41,7 +52,7 @@ bool isEmpty() {
 int enqueue(int element) {
 
     // fail if the queue is full
-    if (head == tail && !empty)
+    if (isFull())
         return -1;
 
     // add element to back of queue
@@ -98,6 +109,16 @@ int main() {
     assert(isEmpty());
     assert(head == 1);
     assert(tail == 1);
+
+    // full queue
+    enqueue(1);
+    enqueue(2);
+    enqueue(3);
+    enqueue(4);
+    enqueue(5);
+    enqueue(6);
+
+    assert(isFull());
 
     return 0;
 }
