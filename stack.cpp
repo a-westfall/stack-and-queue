@@ -48,7 +48,7 @@ bool isFull() {
 int push(int element) {
 
     // fail if stack is full
-    if(isFull())
+    if (isFull())
         return -1;
     
     // add element to tos
@@ -68,7 +68,7 @@ int push(int element) {
 int pop() {
 
     // fail if stack is empty
-    if(empty())
+    if (empty())
         return -1;
     
     // pop the element at tos
@@ -92,10 +92,8 @@ std::ostream& status(std::ostream& out) {
         out << i << ":  " << stack[i] << "\n";
     }
 
-    // add tos to ostream
+    // add tos and its contents to ostream
     out << "\nCurrent TOS: " << tos << "\n";
-
-    // add contents of stack at tos to ostream
     out << "Element at TOS: " << stack[tos] << "\n\n";
 
     return out;
