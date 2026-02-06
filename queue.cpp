@@ -33,6 +33,7 @@ bool isEmpty() {
 /*
     Add an element to the back of the queue.
 
+    @param element Item to be added to the queue
     @return Success or failure of enqueueing the element
     @retval 0 Success
     @retval -1 Failure

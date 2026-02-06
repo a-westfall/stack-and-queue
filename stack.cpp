@@ -41,6 +41,7 @@ bool isFull() {
 /*
     Add an element to the top of stack.
 
+    @param element Item to be added to stack
     @return Success or failure of pushing the element
     @retval 0 Success
     @retval -1 Failure
