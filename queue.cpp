@@ -1,5 +1,5 @@
 /*
-    Implementation file for queue container.
+    Implementation file for queue container without use of classes or structs.
 
     Includes enqueue, dequeue, status, isEmpty and isFull.
 */
@@ -52,21 +52,22 @@ bool isFull() {
 */
 int enqueue(int element) {
 
-    // fail if the queue is full
+    int result = 0;
+
+    // fail if the queue is full or add element to back of queue
     if (isFull()) {
         std::cerr << "ERROR. Unable to enqueue element. Queue is full.\n\n";
-        return -1;
+        result = -1;
+    } else {
+        queue[tail] = element;
+        tail = (tail + 1) % SIZE;
+
+        // queue is no longer empty
+        empty = false;
     }
 
-    // add element to back of queue
-    queue[tail] = element;
-    tail = (tail + 1) % SIZE;
-
-    // queue is no longer empty
-    empty = false;
-
-    // return success code
-    return 0;
+    // return success or failure code
+    return result;
 }
 
 /*
@@ -78,22 +79,23 @@ int enqueue(int element) {
 */
 int dequeue() {
 
-    // fail if queue is empty
+    int result = 0;
+
+    // fail if queue is empty or remove front element
     if (isEmpty()) {
         std::cerr << "ERROR. Unable to dequeue element. Queue is empty.\n\n";
-        return -1;
+        result = -1;
+    } else {
+        head = (head + 1) % SIZE;
+
+        // check if queue empty
+        if (head == tail) {
+            empty = true;
+        }
     }
     
-    // remove front element
-    queue[head] = 0;
-    head = (head + 1) % SIZE;
-
-    // check if queue empty
-    if (head == tail)
-        empty = true;
-    
-    // return success code
-    return 0;
+    // return success or failure code
+    return result;
 }
 
 /*
