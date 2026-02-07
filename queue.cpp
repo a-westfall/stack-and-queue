@@ -53,8 +53,10 @@ bool isFull() {
 int enqueue(int element) {
 
     // fail if the queue is full
-    if (isFull())
+    if (isFull()) {
+        std::cerr << "ERROR. Unable to enqueue element. Queue is full.\n\n";
         return -1;
+    }
 
     // add element to back of queue
     queue[tail] = element;
@@ -77,8 +79,10 @@ int enqueue(int element) {
 int dequeue() {
 
     // fail if queue is empty
-    if (isEmpty())
+    if (isEmpty()) {
+        std::cerr << "ERROR. Unable to dequeue element. Queue is empty.\n\n";
         return -1;
+    }
     
     // remove front element
     queue[head] = 0;
@@ -134,6 +138,13 @@ int main() {
     assert(head == 1);
     assert(tail == 1);
 
+    // dequeue from empty queue
+    dequeue();
+
+    assert(isEmpty());
+    assert(head == 1);
+    assert(tail == 1);
+
     // full queue
     enqueue(1);
     enqueue(2);
@@ -144,6 +155,14 @@ int main() {
 
     assert(isFull());
 
+    // enqueue to full queue
+    enqueue(23);
+
+    assert(head == 1);
+    assert(tail == 1);
+    assert(queue[head] == 1);
+    assert(queue[tail] == 1);
+
     // queue status
     dequeue();
     status(std::cout);
@@ -152,6 +171,21 @@ int main() {
     assert(!isEmpty());
     assert(head == 2);
     assert(tail == 1);
+
+    // enqueue and dequeue elements
+    dequeue();
+    dequeue();
+    enqueue(23);
+    enqueue(44);
+    enqueue(21);
+    dequeue();
+
+    status(std::cout);
+
+    assert(!isEmpty());
+    assert(!isFull());
+    assert(head == 5);
+    assert(tail == 4);
 
     return 0;
 }
