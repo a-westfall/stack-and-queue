@@ -1,5 +1,5 @@
 /*
-    Implementation file for stack container.
+    Implementation file for stack container without use of classes or structs.
 
     Includes push, pop, status, empty and isFull.
 */
@@ -13,7 +13,7 @@ const int SIZE = 6;
 // top of stack meta-pointer
 int tos = -1;
 
-// array stack
+// global array stack
 int stack[SIZE];
 
 /*
@@ -35,7 +35,7 @@ bool empty() {
     @retval false Stack is not full
 */
 bool isFull() {
-    return tos >= SIZE - 1;
+    return tos == SIZE - 1;
 }
 
 /*
@@ -51,7 +51,6 @@ int push(int element) {
     // fail if stack is full
     if (isFull()) {
         std::cerr << "ERROR. Unable to push element. Stack is full.\n\n";
-
         return -1;
     }
     
@@ -78,7 +77,7 @@ int pop() {
     }
     
     // pop the element at tos
-    stack[tos--] = 0;
+    tos--;
 
     // return success code
     return 0;
@@ -100,7 +99,11 @@ std::ostream& status(std::ostream& out) {
 
     // add tos and its contents to ostream
     out << "\nCurrent TOS: " << tos << "\n";
-    out << "Element at TOS: " << stack[tos] << "\n\n";
+    if (empty()) {
+        out << "Stack empty.\n\n";
+    } else {
+        out << "Element at TOS: " << stack[tos] << "\n\n";
+    }
 
     return out;
 }
