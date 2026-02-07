@@ -48,17 +48,18 @@ bool isFull() {
 */
 int push(int element) {
 
-    // fail if stack is full
+    int result = 0;
+
+    // fail if stack is full or add element
     if (isFull()) {
         std::cerr << "ERROR. Unable to push element. Stack is full.\n\n";
-        return -1;
+        result = -1;
+    } else {
+        stack[++tos] = element;
     }
     
-    // add element to tos
-    stack[++tos] = element;
-    
-    // return success code
-    return 0;
+    // return success or fail code
+    return result;
 }
 
 /*
@@ -70,17 +71,18 @@ int push(int element) {
 */
 int pop() {
 
-    // fail if stack is empty
+    int result = 0;
+
+    // fail if stack is empty or remove element
     if (empty()) {
         std::cerr << "ERROR. Unable to pop element. Stack is empty.\n\n";
-        return -1;
+        result = -1;
+    } else {
+        tos--;
     }
-    
-    // pop the element at tos
-    tos--;
 
-    // return success code
-    return 0;
+    // return success or fail code
+    return result;
 }
 
 /*
