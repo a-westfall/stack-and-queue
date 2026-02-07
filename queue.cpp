@@ -4,6 +4,7 @@
     Includes enqueue, dequeue, status, isEmpty and isFull.
 */
 
+#include <iostream>
 #include <cassert>
 
 // queue size
@@ -91,6 +92,29 @@ int dequeue() {
     return 0;
 }
 
+/*
+    View queue contents and tos.
+
+    @param out Output stream that is written to 
+    @return Ostream containing array contents and head and tail meta-pointers
+*/
+std::ostream& status(std::ostream& out) {
+
+    // add array contents to ostream
+    out << "Array contents: \n";
+    for (int i = 0; i < SIZE; ++i) {
+        out << i << ":  " << queue[i] << "\n";
+    }
+
+    // add head, tail and their contents to ostream
+    out << "\nCurrent head: " << head << "\n";
+    out << "Element at head: " << queue[head];
+    out << "\nCurrent tail: " << tail << "\n";
+    out << "Element at tail: " << queue[tail] << "\n\n";
+
+    return out;
+}
+
 int main() {
 
     // empty queue
@@ -119,6 +143,15 @@ int main() {
     enqueue(6);
 
     assert(isFull());
+
+    // queue status
+    dequeue();
+    status(std::cout);
+
+    assert(!isFull());
+    assert(!isEmpty());
+    assert(head == 2);
+    assert(tail == 1);
 
     return 0;
 }
