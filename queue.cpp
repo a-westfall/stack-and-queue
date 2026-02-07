@@ -56,7 +56,7 @@ int enqueue(int element) {
 
     // fail if the queue is full or add element to back of queue
     if (isFull()) {
-        std::cerr << "ERROR. Unable to enqueue element. Queue is full.\n\n";
+        std::cerr << "\nERROR. Unable to enqueue element. Queue is full.\n\n";
         result = -1;
     } else {
         queue[tail] = element;
@@ -83,7 +83,7 @@ int dequeue() {
 
     // fail if queue is empty or remove front element
     if (isEmpty()) {
-        std::cerr << "ERROR. Unable to dequeue element. Queue is empty.\n\n";
+        std::cerr << "\nERROR. Unable to dequeue element. Queue is empty.\n\n";
         result = -1;
     } else {
         head = (head + 1) % SIZE;
@@ -113,10 +113,15 @@ std::ostream& status(std::ostream& out) {
     }
 
     // add head, tail and their contents to ostream
-    out << "\nCurrent head: " << head << "\n";
-    out << "Element at head: " << queue[head];
+    out << "\nCurrent head: " << head;
     out << "\nCurrent tail: " << tail << "\n";
-    out << "Element at tail: " << queue[tail] << "\n\n";
+    if (isEmpty()) {
+        out << "Queue empty.\n";
+    }
+    else {
+        out << "\nElement at head: " << queue[head];
+        out << "\nElement at tail: " << queue[tail] << "\n\n";
+    }
 
     return out;
 }
@@ -125,6 +130,8 @@ int main() {
 
     // empty queue
     assert(isEmpty());
+
+    status(std::cout);
 
     // add an element
     enqueue(1);
